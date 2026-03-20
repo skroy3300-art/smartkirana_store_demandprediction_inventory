@@ -1,9 +1,3 @@
-"""
-app.py
-------
-Smart Kirana Store – Demand Prediction & Inventory Optimization System
-Streamlit Web Application
-"""
 
 import os
 import sys
@@ -15,7 +9,7 @@ import streamlit as st
 
 warnings.filterwarnings("ignore")
 
-# ── Path setup ────────────────────────────────────────────────────────────────
+#  Path setup 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, BASE_DIR)
 
@@ -32,10 +26,8 @@ from src.utils import (
 
 MODELS_DIR = os.path.join(BASE_DIR, "models")
 
-
-# ══════════════════════════════════════════════════════════════════════════════
 # Page Config
-# ══════════════════════════════════════════════════════════════════════════════
+
 st.set_page_config(
     page_title="Smart Kirana Store",
     page_icon="🛒",
@@ -43,7 +35,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# ── Custom CSS ────────────────────────────────────────────────────────────────
+# Custom CSS 
 st.markdown("""
 <style>
     /* Header gradient */
@@ -97,9 +89,8 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-# ══════════════════════════════════════════════════════════════════════════════
+
 # Session State
-# ══════════════════════════════════════════════════════════════════════════════
 if "df_processed" not in st.session_state:
     st.session_state["df_processed"] = None
 if "df_clean" not in st.session_state:
@@ -112,9 +103,8 @@ if "inventory" not in st.session_state:
     st.session_state["inventory"] = None
 
 
-# ══════════════════════════════════════════════════════════════════════════════
 # Sidebar
-# ══════════════════════════════════════════════════════════════════════════════
+
 with st.sidebar:
     st.image("https://img.icons8.com/color/96/shop.png", width=60)
     st.markdown("## 🛒 Smart Kirana")
@@ -154,9 +144,8 @@ with st.sidebar:
                              index=0)
 
 
-# ══════════════════════════════════════════════════════════════════════════════
+
 # Header
-# ══════════════════════════════════════════════════════════════════════════════
 st.markdown("""
 <div class="main-header">
   <h1>🛒 Smart Kirana Store</h1>
@@ -165,9 +154,9 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-# ══════════════════════════════════════════════════════════════════════════════
+
 # Data Loading
-# ══════════════════════════════════════════════════════════════════════════════
+
 @st.cache_data(show_spinner="⏳ Processing dataset...")
 def load_and_process(src):
     if isinstance(src, str):
@@ -198,9 +187,7 @@ df_proc  = st.session_state["df_processed"]
 df_clean = st.session_state["df_clean"]
 
 
-# ══════════════════════════════════════════════════════════════════════════════
 # KPI Strip
-# ══════════════════════════════════════════════════════════════════════════════
 total_sales    = df_clean["sales"].sum()
 total_orders   = len(df_clean)
 unique_prods   = df_clean["sub_category"].nunique()
@@ -228,9 +215,9 @@ for col, (val, label) in zip(kpi_cols, kpis):
 st.markdown("<br>", unsafe_allow_html=True)
 
 
-# ══════════════════════════════════════════════════════════════════════════════
+
 # Tabs
-# ══════════════════════════════════════════════════════════════════════════════
+
 tabs = st.tabs([
     "📊 EDA Dashboard",
     "🤖 Model Training",
@@ -240,9 +227,7 @@ tabs = st.tabs([
 ])
 
 
-# ────────────────────────────────────────────────────────────────────────────
 # TAB 1 – EDA
-# ────────────────────────────────────────────────────────────────────────────
 with tabs[0]:
     st.markdown('<div class="section-title">Exploratory Data Analysis</div>',
                 unsafe_allow_html=True)
@@ -280,9 +265,9 @@ with tabs[0]:
     st.dataframe(df_clean.head(500), use_container_width=True, height=300)
 
 
-# ────────────────────────────────────────────────────────────────────────────
+
 # TAB 2 – Model Training
-# ────────────────────────────────────────────────────────────────────────────
+
 with tabs[1]:
     st.markdown('<div class="section-title">Machine Learning Model Training</div>',
                 unsafe_allow_html=True)
@@ -366,10 +351,8 @@ with tabs[1]:
 
         st.success(f"**Best model: {winner}** — RMSE is ₹{delta:,.0f} lower than the other model.")
 
-
-# ────────────────────────────────────────────────────────────────────────────
 # TAB 3 – Demand Forecast
-# ────────────────────────────────────────────────────────────────────────────
+
 with tabs[2]:
     st.markdown('<div class="section-title">Demand Forecasting</div>',
                 unsafe_allow_html=True)
@@ -445,9 +428,8 @@ with tabs[2]:
         st.dataframe(display_df, use_container_width=True, height=350)
 
 
-# ────────────────────────────────────────────────────────────────────────────
 # TAB 4 – Inventory Optimization
-# ────────────────────────────────────────────────────────────────────────────
+
 with tabs[3]:
     st.markdown('<div class="section-title">Inventory Optimization (EOQ Model)</div>',
                 unsafe_allow_html=True)
@@ -499,9 +481,9 @@ with tabs[3]:
             st.dataframe(styled, use_container_width=True, height=420)
 
 
-# ────────────────────────────────────────────────────────────────────────────
+
 # TAB 5 – Alerts & Reports
-# ────────────────────────────────────────────────────────────────────────────
+
 with tabs[4]:
     st.markdown('<div class="section-title">⚠️ Alerts & Report Download</div>',
                 unsafe_allow_html=True)
@@ -567,7 +549,7 @@ with tabs[4]:
         st.caption(f"Report generated with {len(preds)} forecast rows × {len(inv)} product categories.")
 
 
-# ── Footer ─────────────────────────────────────────────────────────────────────
+# Footer 
 st.divider()
 st.markdown("""
 <div style="text-align:center; color:#999; font-size:0.8rem; padding-bottom:1rem;">

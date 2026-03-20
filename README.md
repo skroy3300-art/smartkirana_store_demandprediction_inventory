@@ -1,12 +1,8 @@
-# 🛒 Smart Kirana Store
+## 🛒 Smart Kirana Store
 ## Demand Prediction & Inventory Optimization System
-
-
-
 
 ## 🗂️ Project Structure
 
-```
 smart_kirana/
 │
 ├── data/
@@ -27,13 +23,10 @@ smart_kirana/
 │   └── utils.py                     ← Plotly charts & report generation
 │
 ├── app.py                           ← Streamlit web application
-├── train_colab.py                   ← Google Colab training script
+├
 ├── requirements.txt
 └── README.md
 ```
-
-
-
 
 ## 🚀 Setup & Run (VS Code / Local)
 
@@ -41,89 +34,26 @@ smart_kirana/
 - Python 3.9+ installed
 - VS Code with Python extension
 
-
 ### Step 1 –  Just open the folder in VS Code
 # File → Open Folder → select smart_kirana
-```
-
----
 
 ### Step 2 – Create a Virtual Environment
 
 Open VS Code Terminal (`Ctrl+`` `) and run:
 
-```bash
 # Windows
 python -m venv venv
 venv\Scripts\activate
 
-# macOS / Linux
-python3 -m venv venv
-source venv/bin/activate
-```
 
-You should see `(venv)` in your terminal prompt.
-
----
 
 ### Step 3 – Install Dependencies
 
-```bash
 pip install -r requirements.txt
-```
 
 This installs: streamlit, pandas, numpy, scikit-learn, plotly, matplotlib, seaborn, openpyxl.
 
----
-
-### Step 4 – Verify Dataset
-
-Ensure this file exists:
-```
-smart_kirana/data/supermart_sales.csv
-```
-If not, copy the uploaded CSV there manually.
-
----
-
-### Step 5A – Train Models LOCALLY (Quick Option)
-
-If you want to train directly without Colab:
-
-```bash
-# From the smart_kirana/ root folder:
-python -c "
-import sys; sys.path.insert(0, '.')
-from src.data_processing import full_pipeline
-from src.model_training import train_models
-df, _ = full_pipeline('data/supermart_sales.csv')
-train_models(df)
-print('Done!')
-"
-```
-
-Models will be saved to `models/` folder.
-
----
-
-### Step 5B – Train Models in Google Colab (Recommended for Portfolio)
-
-1. Open [Google Colab](https://colab.research.google.com)
-2. Create a new notebook
-3. Upload `train_colab.py` → copy each `# ── CELL N` block as a separate notebook cell
-4. Upload `supermart_sales.csv` when prompted (Cell 3)
-5. Run all cells (Runtime → Run all)
-6. After training, uncomment Cell 14 to download `smart_kirana_models.zip`
-7. Extract the zip and copy all `.pkl` files into your local `smart_kirana/models/` folder
-
-**Why Colab?**  
-- Free GPU/CPU acceleration  
-- Shareable training notebook link for your portfolio  
-- Demonstrates cloud-based ML workflow  
-
----
-
-### Step 6 – Launch the Streamlit App
+### Step 4 – Launch the Streamlit App
 
 ```bash
 # Make sure you're in the smart_kirana/ directory with venv active
@@ -132,7 +62,7 @@ streamlit run app.py
 
 Your browser will open at **http://localhost:8501** automatically.
 
----
+
 
 ## 🖥️ Using the Application
 
@@ -251,21 +181,17 @@ Festival days are flagged in the forecast and trigger inventory alerts.
 
 
 
----
+
 
 ## 📦 Dependencies
-
-```
 streamlit>=1.32.0     # Web UI framework
 pandas>=2.0.0         # Data manipulation
 numpy>=1.24.0         # Numerical computing
 scikit-learn>=1.3.0   # ML models
 plotly>=5.18.0        # Interactive charts
-matplotlib>=3.7.0     # Static plots (Colab)
-seaborn>=0.12.0       # Statistical plots (Colab)
+matplotlib>=3.7.0     # Static plots 
+seaborn>=0.12.0       # Statistical plots 
 openpyxl>=3.1.0       # Excel export support
-```
 
----
 
 
