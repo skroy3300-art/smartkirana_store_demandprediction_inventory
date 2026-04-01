@@ -1,197 +1,239 @@
-## 🛒 Smart Kirana Store
-## Demand Prediction & Inventory Optimization System
+# 🏪 Smart Kirana Store Demand Prediction & Inventory Management
 
-## 🗂️ Project Structure
+A Machine Learning-based web application designed to help Kirana (local retail) stores predict product demand and manage inventory efficiently. This system enables smarter decision-making by forecasting future demand and generating intelligent restocking alerts.
 
-smart_kirana/
+---
+
+## 🚀 Features
+
+* 📊 Demand prediction using Machine Learning
+* 📦 Smart inventory management system
+* 🔔 Automated reorder alerts
+* 📈 Data-driven decision making
+* 🏪 Designed specifically for Kirana stores
+* ⚡ Reduces stockouts and overstocking
+* 🌐 Interactive dashboard for visualization
+
+---
+
+## 🧠 Project Overview
+
+Kirana stores often rely on manual tracking or experience-based decisions for inventory management. This project solves that problem by using machine learning to forecast demand based on historical sales data.
+
+Accurate demand forecasting helps:
+
+* Avoid stock shortages
+* Reduce excess inventory
+* Improve customer satisfaction
+* Increase profitability
+
+Machine learning models can significantly improve inventory decisions by analyzing past trends and predicting future demand patterns ([GeeksforGeeks][1]).
+
+---
+
+## 🛠️ Tech Stack
+
+### 💻 Programming & Libraries
+
+* Python
+* Pandas, NumPy
+* Scikit-learn
+* XGBoost
+
+### 📊 Visualization
+
+* Matplotlib / Seaborn
+
+### 🌐 Web Framework (if applicable)
+
+* Flask / Dash
+
+### 🧰 Tools
+
+* Jupyter Notebook
+* Git & GitHub
+
+---
+
+## 📂 Project Structure
+
+```
+smartkirana_store_demandprediction_inventory/
 │
-├── data/
-│   └── supermart_sales.csv          ← Raw dataset (9,994 rows)
-│
-├── models/                          ← Saved model files (after training)
-│   ├── random_forest.pkl
-│   ├── linear_regression.pkl
-│   └── feature_cols.pkl
-│
-├── reports/                         ← Downloaded CSV reports saved here
-│
-├── src/
-│   ├── __init__.py
-│   ├── data_processing.py           ← Data cleaning & feature engineering
-│   ├── model_training.py            ← ML training, evaluation, prediction
-│   ├── inventory_optimization.py    ← EOQ, safety stock, reorder logic
-│   └── utils.py                     ← Plotly charts & report generation
-│
-├── app.py                           ← Streamlit web application
-├
-├── requirements.txt
-└── README.md
+├── notebooks/                 # ML model training notebooks
+├── dataset/                   # Dataset files (CSV)
+├── models/                    # Saved ML models
+├── app.py / appV1.py          # Web application
+├── requirements.txt           # Dependencies
+└── README.md                  # Documentation
 ```
 
-## 🚀 Setup & Run (VS Code / Local)
+---
 
-### Prerequisites
-- Python 3.9+ installed
-- VS Code with Python extension
+## 📊 Dataset
 
-### Step 1 –  Just open the folder in VS Code
-# File → Open Folder → select smart_kirana
+The dataset typically includes:
 
-### Step 2 – Create a Virtual Environment
+* Product ID
+* Sales data
+* Inventory levels
+* Promotions / discounts
+* Date & time features
 
-Open VS Code Terminal (`Ctrl+`` `) and run:
+These features are used to train machine learning models for demand prediction.
 
-# Windows
-python -m venv venv
-venv\Scripts\activate
+---
 
+## 🤖 Machine Learning Models
 
+The project may include multiple models such as:
 
-### Step 3 – Install Dependencies
+* 📉 Linear Regression (baseline model)
+* 🌲 Random Forest
+* ⚡ XGBoost (high accuracy model)
 
-pip install -r requirements.txt
+XGBoost is widely used for demand forecasting because of its high performance and ability to handle complex patterns in data.
 
-This installs: streamlit, pandas, numpy, scikit-learn, plotly, matplotlib, seaborn, openpyxl.
+---
 
-### Step 4 – Launch the Streamlit App
+## ⚙️ Installation & Setup
+
+### 1️⃣ Clone the Repository
 
 ```bash
-# Make sure you're in the smart_kirana/ directory with venv active
-streamlit run app.py
-```
-
-Your browser will open at **http://localhost:8501** automatically.
-
-
-
-## 🖥️ Using the Application
-
-Once the app is running:
-
-| Tab | Action |
-|-----|--------|
-| **EDA Dashboard** | Explore 8 charts automatically (no action needed) |
-| **Model Training** | Click "🚀 Train Models" (or skip if models already trained in Colab) |
-| **Demand Forecast** | Select sub-categories → click "🔮 Generate Forecast" |
-| **Inventory Optimization** | Click "📦 Compute Inventory Recommendations" |
-| **Alerts & Reports** | View alerts → click "⬇️ Download Report" |
-
-**Sidebar controls:**
-- Upload your own CSV to override the bundled dataset
-- Adjust Lead Time, Service Level, Ordering Cost for inventory calculations
-- Choose forecast horizon (7–30 days) and model (RF vs LR)
-
----
-
-## 📊 Dataset Description
-
-| Column | Description |
-|--------|-------------|
-| Order ID | Unique transaction identifier |
-| Customer Name | Customer (anonymised) |
-| Category | Top-level product category (e.g., Beverages) |
-| Sub Category | Detailed product group (e.g., Health Drinks) |
-| City / State / Region | Geographic location |
-| Order Date | Transaction date (dd-mm-yyyy) |
-| Sales | Gross revenue (₹) |
-| Discount | Discount fraction (0–1) |
-| Profit | Net profit (₹) |
-
----
-
-## 🧠 ML Architecture
-
-```
-Raw CSV
-   │
-   ▼
-data_processing.py
-   • Clean & parse dates
-   • Engineer 15 features
-   • Aggregate daily per sub-category
-   • Label-encode categoricals
-   │
-   ▼
-model_training.py
-   • 80/20 train-test split
-   • LinearRegression (baseline)
-   • RandomForestRegressor (200 trees)
-   • Evaluate: MAE, RMSE, R²
-   • Save .pkl files
-   │
-   ▼
-predict_future_demand()
-   • Build future date rows
-   • Predict 7–30 days ahead
-   │
-   ▼
-inventory_optimization.py
-   • EOQ = √(2DS/H)
-   • Safety Stock = Z·√(LT·σ²)
-   • Reorder Level = D_avg·LT + SS
-   • Perishable override
-   • Alert generation
-   │
-   ▼
-app.py (Streamlit)
-   • Interactive dashboard
-   • Plotly visualizations
-   • CSV report download
+git clone https://github.com/skroy3300-art/smartkirana_store_demandprediction_inventory.git
+cd smartkirana_store_demandprediction_inventory
 ```
 
 ---
 
-## 📈 Model Performance (Typical Results)
+### 2️⃣ Create Virtual Environment
 
-| Model | MAE | RMSE | R² |
-|-------|-----|------|----|
-| Linear Regression | ~420 | ~680 | ~0.72 |
-| Random Forest | ~290 | ~490 | ~0.86 |
+```bash
+python -m venv venv
+```
 
-*Results vary slightly per run due to random seeding.*
+Activate:
 
----
+**Windows**
 
-## 🎉 Festival Logic
+```bash
+venv\Scripts\activate
+```
 
-Demand spikes are detected around these Indian festivals (±7 days):
+**Mac/Linux**
 
-| Festival | Typical Month |
-|----------|--------------|
-| Diwali | October/November |
-| Holi | March |
-| Eid | May/June |
-| Christmas | December |
-
-Festival days are flagged in the forecast and trigger inventory alerts.
+```bash
+source venv/bin/activate
+```
 
 ---
 
-## 🥦 Perishable Item Logic
+### 3️⃣ Install Dependencies
 
-| Sub-Category | Shelf Life | Order Strategy |
-|-------------|-----------|----------------|
-| Fresh Vegetables | 3 days | 3-day supply × 0.85 |
-| Fresh Fruits | 4 days | 4-day supply × 0.85 |
-| Dairy | 5 days | 5-day supply × 0.85 |
-| Eggs, Meat & Fish | 2 days | 2-day supply × 0.85 |
-| Bakery | 2 days | 2-day supply × 0.85 |
+```bash
+pip install -r requirements.txt
+```
 
 ---
 
+### 4️⃣ Run the Application
 
+```bash
+python app.py
+```
 
+*(or run notebook for model training)*
 
+---
 
-## 📦 Dependencies
-streamlit>=1.32.0     # Web UI framework
-pandas>=2.0.0         # Data manipulation
-numpy>=1.24.0         # Numerical computing
-scikit-learn>=1.3.0   # ML models
-plotly>=5.18.0        # Interactive charts
-matplotlib>=3.7.0     # Static plots 
-seaborn>=0.12.0       # Statistical plots 
-openpyxl>=3.1.0       # Excel export support
+## 📈 How It Works
 
+1. Load historical sales & inventory data
+2. Perform data preprocessing and feature engineering
+3. Train machine learning model
+4. Predict future demand
+5. Compare demand with current inventory
+6. Generate reorder alerts
 
+Accurate demand forecasting is critical to avoid stockouts and excess inventory, ensuring efficient retail operations ([ScienceDirect][2]).
 
+---
+
+## 🔔 Output
+
+* 📊 Predicted demand for each product
+* ⚠️ Reorder alerts when stock is low
+* ✅ Inventory status (sufficient / insufficient)
+
+---
+
+## 🌍 Real-World Impact
+
+This system is especially useful for small retail stores (Kirana stores), where:
+
+* Inventory is often managed manually
+* Demand varies based on locality
+* Stockouts lead to lost sales
+
+Hyperlocal demand forecasting can significantly improve inventory efficiency and sales performance ([aimlprogramming.com][3]).
+
+---
+
+## 📸 Screenshots
+
+*Add your project screenshots here*
+
+---
+
+## 🌐 Deployment
+
+You can deploy this project on:
+
+* Render
+* AWS (EC2 / S3 / Elastic Beanstalk)
+* Railway
+
+---
+
+## 📈 Future Enhancements
+
+* 📱 Mobile app integration
+* 🧾 Billing system integration
+* 📊 Real-time analytics dashboard
+* 🤖 AI-based recommendation system
+* 🌍 Multi-store support
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!
+
+1. Fork the repository
+2. Create a new branch
+3. Make changes
+4. Submit a Pull Request
+
+---
+
+## 📜 License
+
+This project is open-source and available under the MIT License.
+
+---
+
+## 👨‍💻 Author
+
+**Shivam Kumar**
+GitHub: https://github.com/skroy3300-art
+
+---
+
+## ⭐ Support
+
+If you like this project, consider giving it a ⭐ on GitHub!
+
+[1]: https://www.geeksforgeeks.org/machine-learning/inventory-demand-forecasting-using-machine-learning-python/?utm_source=chatgpt.com "Inventory Demand Forecasting using Machine Learning - Python - GeeksforGeeks"
+[2]: https://www.sciencedirect.com/science/article/pii/S2773067025000202?utm_source=chatgpt.com "A machine learning approach to inventory stockout prediction - ScienceDirect"
+[3]: https://aimlprogramming.com/services/hyperlocal-demand-forecasting-for-kirana-stores/?utm_source=chatgpt.com "Hyperlocal Demand Forecasting for Kirana Stores | AI/ML Development Solutions"
