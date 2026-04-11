@@ -226,7 +226,7 @@ This project is open-source and available under the MIT License.
 ## 👨‍💻 Author
 
 **Shivam Kumar**
-GitHub: https://github.com/skroy3300-art
+GitHub: https://github.com/shivam-techstack
 
 ---
 
